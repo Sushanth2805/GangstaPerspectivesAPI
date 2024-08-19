@@ -1,15 +1,11 @@
 from flask import Flask, render_template
 import requests
-from dotenv import load_dotenv
-import os
-
-# Load environment variables from the .env file
-load_dotenv()
+import streamlit as st
 
 app = Flask(__name__)
 
-# Access the API key from the environment variable
-YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
+# Load the API key from the Streamlit secrets
+YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
 CHANNEL_ID = 'UCNTdQYhTtb13-IYKYCW0d1A'
 
 @app.route('/')
