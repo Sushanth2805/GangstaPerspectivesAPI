@@ -1,20 +1,16 @@
-from flask import Flask, render_template
 import requests
 import streamlit as st
-
-app = Flask(__name__)
 
 # Load the API key from the Streamlit secrets
 YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
 CHANNEL_ID = 'UCNTdQYhTtb13-IYKYCW0d1A'
 
-@app.route('/')
-def home():
-    return render_template('home.html')
+# Streamlit app title
+st.title('YouTube Notification Website')
 
-@app.route('/latest_videos')
-def latest_videos():
-    url = f'https://www.googleapis.com/youtube/v3/search?key={YOUTUBE_API_KEY}&channelId={CHANNEL_ID}&part=snippet,id&order=date&maxResults=10'
+# Fetch the latest videos from the YouTube API
+def fetch_latest_videos(channel_id, api_key, max_results=10):
+    url = f'https://www.googleapis.com/youtube/v3/search?key={api_key}&channelId={channel_id}&part=snippet,id&order=date&maxResults={max_results}'
     response = requests.get(url)
     data = response.json()
     videos = []
@@ -26,7 +22,16 @@ def latest_videos():
             'published_at': item['snippet']['publishedAt']
         }
         videos.append(video_info)
-    return render_template('latest_videos.html', videos=videos)
+    return videos
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# Display the latest videos in the Streamlit app
+videos = fetch_latest_videos(CHANNEL_ID, YOUTUBE_API_KEY)
+
+st.header("Latest Videos")
+for video in videos:
+    st.subheader(video['title'])
+    st.image(video['thumbnail'], width=300)
+    st.write(f"Uploaded on: {video['published_at']}")
+    st.markdown(f"[Watch on YouTube](https://www.youtube.com/watch?v={video['videoId']})")
+
+st.markdown("[Go back to the top](#youtube-notification-website)")
