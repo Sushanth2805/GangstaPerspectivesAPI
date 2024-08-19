@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Videos</title>
+</head>
+<body>
+    <h1>Latest Videos</h1>
+    <ul>
+        {% for video in videos %}
+        <li>
+            <h2>{{ video.title }}</h2>
+            <img src="{{ video.thumbnail }}" alt="Thumbnail of {{ video.title }}">
+            <p>Uploaded on: {{ video.published_at }}</p>
+            <p><a href="https://www.youtube.com/watch?v={{ video.videoId }}" target="_blank">Watch on YouTube</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+    <p><a href="/">Go back to the home page</a></p>
+</body>
+</html>
