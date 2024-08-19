@@ -6,7 +6,7 @@ YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
 CHANNEL_ID = 'UCNTdQYhTtb13-IYKYCW0d1A'
 
 # Streamlit app title
-st.title('YouTube Notification Website')
+st.title('Gangsta Perspectives Latest Videos')
 
 # Fetch the latest videos from the YouTube API
 def fetch_latest_videos(channel_id, api_key, max_results=10):
