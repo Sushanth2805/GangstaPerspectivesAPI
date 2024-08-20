@@ -1,12 +1,12 @@
 import requests
 import streamlit as st
 
-# Load the API key from the Streamlit secrets
+# Access the API key from Streamlit secrets
 YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
 CHANNEL_ID = 'UCNTdQYhTtb13-IYKYCW0d1A'
 
 # Streamlit app title
-st.title('Gangsta Perspectives Latest Videos')
+st.title('YouTube Notification Website')
 
 # Fetch the latest videos from the YouTube API
 def fetch_latest_videos(channel_id, api_key, max_results=10):
