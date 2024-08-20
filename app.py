@@ -13,7 +13,6 @@ def fetch_latest_videos(channel_id, api_key, max_results=10):
     url = f'https://www.googleapis.com/youtube/v3/search?key={api_key}&channelId={channel_id}&part=snippet,id&order=date&maxResults={max_results}'
     response = requests.get(url)
     data = response.json()
-    st.write(data)  # This will print the API response in Streamlit
     if 'items' not in data:
         st.error("No videos found or API response error. Check the API key and channel ID.")
         return []
